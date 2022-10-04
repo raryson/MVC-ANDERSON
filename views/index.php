@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="views/css/index.css">
     <title>CEMEAR</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
     <?php if(!empty($returnMessage)): ?>
@@ -37,17 +38,19 @@
                 </tr>
             </thead>
             <tbody>
+                <?= $counter = 0; ?>
                 <?php foreach($resultData as $data): ?>
-                    <tr id="product-line">
+                    <tr id="product-line-<?= $counter ?>">
                         <td> <?= $data["id"]; ?> </td>
                         <td> <?= $data["name"]; ?> </td>
                         <td> <?= $data["email"]; ?> </td>
                         <td> <?= $data["phone"]; ?> </td>
                         <td> 
-                            <a class="button btn-edit" href="./index.php?a=search&v=editCreate&search=<?= $data['id'] ?>">Editar</a>
+                            <a class="button btn-edit" onclick=edit(<?= $counter ?>)" href="./index.php?a=search&v=editCreate&search=<?= $data['id'] ?>">Editar</a>
                             <button class="button btn-delete" onclick="verifyDelete(<?= $data['id'] ?>)">Deletar</button> 
                         </td>
                     </tr>
+                <?= $counter++; ?>
                 <?php endforeach; ?>
             </tbody>
         </table>
@@ -64,14 +67,9 @@
         }
     }
 
-    let productLine = document.getElementById("product-line");
-    productLine.addEventListener("focus", function( event ) {
-        event.target.style.background = "pink";
-    }, true);
-
-    productLine.addEventListener("blur", function( event ) {
-        event.target.style.background = "";
-    }, true);
+    function edit(id) {	
+        $( `#product-line${id}` ).blur();
+    }
 
     function reload()
     {
