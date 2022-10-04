@@ -38,7 +38,7 @@
             </thead>
             <tbody>
                 <?php foreach($resultData as $data): ?>
-                    <tr>
+                    <tr id="product-line">
                         <td> <?= $data["id"]; ?> </td>
                         <td> <?= $data["name"]; ?> </td>
                         <td> <?= $data["email"]; ?> </td>
@@ -63,6 +63,16 @@
             window.location.replace('./index.php?a=delete&id='+id);
         }
     }
+
+    let productLine = document.getElementById("product-line");
+    productLine.addEventListener("focus", function( event ) {
+        event.target.style.background = "pink";
+    }, true);
+
+    productLine.addEventListener("blur", function( event ) {
+        event.target.style.background = "";
+    }, true);
+
     function reload()
     {
         window.location.replace('index.php');
