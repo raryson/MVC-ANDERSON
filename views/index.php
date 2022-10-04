@@ -41,6 +41,7 @@
                 <?= $counter=0; ?>
                 <?php foreach($resultData as $data): ?>
                     <tr id="product-row-<?= $counter ?>">
+
                         <td> <?= $data["id"]; ?> </td>
                         <td> <?= $data["name"]; ?> </td>
                         <td> <?= $data["email"]; ?> </td>
@@ -67,9 +68,12 @@
         }
     }
 
+
     function edit(id) {
         $(`#product-row-${id}`).blur();
     }
+
+
     function reload()
     {
         window.location.replace('index.php');
